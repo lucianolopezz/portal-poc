@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
   content: [
@@ -9,10 +10,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "var(--primary-color)",
+        secondary: "var(--secondary-color)",
+        background: "var(--background-color)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addBase }) => {
+      addBase({
+        ":root": {
+          "--primary-color": "#888888", // Cor padrão
+          "--secondary-color": "#cccccc", // Cor padrão
+          "--background-color": "#ffffff", // Cor padrão
+        },
+      });
+    }),
+  ],
 } satisfies Config;
